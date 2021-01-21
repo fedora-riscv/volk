@@ -1,3 +1,0 @@
-# volk
-
-The volk package
