@@ -84,13 +84,17 @@ pushd %{_vpath_builddir}
 cp -a html %{buildroot}%{_docdir}/%{name}
 popd
 
+# drop list_cpu_features, not needed, just some demo binary,
+# unavailable on s390x, for details see:
+# https://github.com/gnuradio/volk/issues/442#issuecomment-772059840
+rm -f %{buildroot}%{_bindir}/list_cpu_features
+
 # drop static objects
 rm -f %{buildroot}%{_libdir}/libcpu_features.a
 
 %files
 %license COPYING
 %doc README.md CHANGELOG.md
-%{_bindir}/list_cpu_features
 %{_bindir}/volk-config-info
 %{_bindir}/volk_modtool
 %{_bindir}/volk_profile
@@ -100,10 +104,12 @@ rm -f %{buildroot}%{_libdir}/libcpu_features.a
 
 %files devel
 %{_includedir}/volk
+%ifnarch s390x
 %{_includedir}/cpu_features
+%{_libdir}/cmake/CpuFeatures
+%endif
 %{_libdir}/libvolk.so
 %{_libdir}/cmake/volk
-%{_libdir}/cmake/CpuFeatures
 %{_libdir}/pkgconfig/*.pc
 
 
