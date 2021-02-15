@@ -1,12 +1,14 @@
 Name:          volk
 Version:       2.4.1
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       The Vector Optimized Library of Kernels
 License:       GPLv3+
 URL:           https://github.com/gnuradio/%{name}
 Source0:       https://github.com/gnuradio/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 Source1:       https://github.com/gnuradio/volk/releases/download/v%{version}/%{name}-%{version}.tar.gz.asc
 Source2:       https://github.com/gnuradio/volk/releases/download/v2.4.1/gpg_volk_release_key.asc
+# https://github.com/gnuradio/volk.git
+Patch0:        volk-2.4.1-python-detection-fix.patch
 
 BuildRequires: gnupg2
 BuildRequires: make
@@ -118,6 +120,10 @@ rm -f %{buildroot}%{_libdir}/libcpu_features.a
 
 
 %changelog
+* Mon Feb 15 2021 Jaroslav Škarvada <jskarvad@redhat.com> - 2.4.1-4
+- Fixed python detection
+  Resolves: rhbz#1928144
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2.4.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
