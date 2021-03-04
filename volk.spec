@@ -65,15 +65,15 @@ export CXXFLAGS="$CFLAGS"
 %cmake
 %cmake_build
 
-cd %{_vpath_builddir}
-make volk_doc %{?_smp_mflags}
+# Use make_build for EL8 compat
+%make_build -C %{__cmake_builddir} volk_doc
 
 
 # temporally disabled the testsuite due to https://github.com/gnuradio/volk/issues/442
 # gnuradio (and all volk consumers) could coredump on s390x and ppc64le under some
 # circumstances, see https://bugzilla.redhat.com/show_bug.cgi?id=1917625#c6
 #%%check
-#cd %{_vpath_builddir}
+#cd %{__cmake_builddir}
 #make test
 
 
@@ -82,9 +82,7 @@ make volk_doc %{?_smp_mflags}
 
 # docs
 mkdir -p %{buildroot}%{_docdir}/%{name}
-pushd %{_vpath_builddir}
-cp -a html %{buildroot}%{_docdir}/%{name}
-popd
+cp -a %{__cmake_builddir}/html %{buildroot}%{_docdir}/%{name}
 
 # drop list_cpu_features, not needed, just some demo binary,
 # unavailable on s390x, for details see:
