@@ -1,6 +1,6 @@
 Name:          volk
 Version:       2.4.1
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       The Vector Optimized Library of Kernels
 License:       GPLv3+
 URL:           https://github.com/gnuradio/%{name}
@@ -118,6 +118,9 @@ rm -f %{buildroot}%{_libdir}/libcpu_features.a
 
 
 %changelog
+* Fri Jun 04 2021 Python Maint <python-maint@redhat.com> - 2.4.1-6
+- Rebuilt for Python 3.10
+
 * Tue Feb 16 2021 Jaroslav Škarvada <jskarvad@redhat.com> - 2.4.1-5
 - Updated patch for python detection
 
