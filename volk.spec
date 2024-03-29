@@ -1,6 +1,6 @@
 Name:          volk
 Version:       3.1.2
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       The Vector Optimized Library of Kernels
 License:       GPL-3.0-or-later
 URL:           https://github.com/gnuradio/%{name}
@@ -17,7 +17,7 @@ BuildRequires: python3-devel
 BuildRequires: python3-mako
 BuildRequires: orc-devel
 BuildRequires: sed
-%ifnarch s390x riscv64
+%ifnarch s390x
 BuildRequires: google-cpu_features-devel
 %endif
 Conflicts:     python3-gnuradio < 3.9.0.0
@@ -111,6 +111,9 @@ cp -a %{__cmake_builddir}/html %{buildroot}%{_docdir}/%{name}
 
 
 %changelog
+* Fri Mar 29 2024 Zhengyu He <hezhy472013@gmail.com> - 3.1.2-2
+- Enable google-cpu_features for riscv64
+
 * Mon Feb 26 2024 Jaroslav Škarvada <jskarvad@redhat.com> - 3.1.2-1
 - New version
   Resolves: rhbz#2266046
